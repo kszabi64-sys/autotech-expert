@@ -1,0 +1,169 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    background-color: brown;
+    position: relative;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+}
+
+.header_center {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header_left {
+    flex: 1;
+}
+
+.title {
+    font-size: 30px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.title_and {
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.header_items {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.header_items a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    margin-right: 20px;
+    margin-top: 13px;
+}
+
+.header_img {
+    margin-left: 10px;
+    width: auto;
+    height: 50px;
+}
+
+.facebook_logo {
+    width: auto;
+    height: 35px;
+    margin-top: -5px;
+}
+
+.tiktok_logo {
+    width: auto;
+    height: 40px;
+    margin-top: -7px;
+}
+
+/* Hamburger ikon - csak mobilon látszik */
+.menu_toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.menu_toggle .bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+}
+
+/* Mobil nézet */
+@media (max-width: 768px) {
+    .header {
+        margin-top: 20px;
+        padding-top: 20px;
+    }
+
+  .header_items {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: brown;
+    z-index: 10;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+    }
+
+    .header_items.show {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    }
+
+    .header {
+        position: relative;
+    }
+
+  .menu_toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    margin-top: -20px;
+    margin-right: 5px;
+  }
+
+  .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+  }
+
+  .header_center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .header_img {
+    width: 60px;
+    height: auto;
+    margin-top: -15px;
+  }
+
+  .title_block {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* vagy flex-start, ha balra igazítanád */
+  line-height: 1.2;
+  margin-left: 5px;
+  margin-top: -20px;
+}
+
+.title, .title_and {
+  font-size: 18px;
+  color: white;
+  text-decoration: none;
+  margin: 0;
+}
+
+  .facebook_logo, .tiktok_logo {
+    width: 30px;
+    height: 30px;
+  }
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoTech Expert</title>
+    <link rel="icon" href="assets/logo.jpg">
+    <link rel="stylesheet" href="header_style.css">
+    <link rel="stylesheet" href="body_style.css">
+    <link rel="stylesheet" href="footer_style.css">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="header_center">
+                <img src="assets/logo-removebg.png" class="header_img">
+                <div class="title_block">
+                    <a class="title" href="index.html">AutoTech Expert | </a>
+                    <a class="title_and" href="index.html"> Service Auto & ITP</a>
+                </div>
+            </div>
+        
+            <div class="menu_toggle" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+            <div class="header_items" id="menu">
+                <a>Map</a>
+                <a>Servicii</a>
+                <a>Programare</a>
+                <a>Contact</a>
+                <a href="https://www.facebook.com/profile.php?id=61565758932533">
+                    <img src="assets/facebook_logo.png" class="facebook_logo">
+                </a>
+                <a href="https://www.tiktok.com/@itpservice.autote?_t=ZN-90MOpDNkH70&_r=1">
+                    <img src="assets/tiktok_logo-removebg-preview.png" class="tiktok_logo">
+                </a>
+            </div>
+        </div>
+        <script>
+        function toggleMenu() {
+            const menu = document.getElementById("menu");
+            menu.classList.toggle("show");
+        }
+        </script>
+    </header>
+
+    <div class="item_one">
+        <img src="assets/item_one_photo.png" class="slide_left">
+        <div class="slide_right">
+            <p>ITP și pentru mașini mai vechi dar bune 💪</p>
+        </div>
+    </div>
+
+    <div class="item_one">
+        <img src="assets/item_two_photo.png" class="slide_left">
+        <div class="slide_right">
+            <p>☀️⛅️⛈️🌧❄️</p>
+            <p><b>V-am adus si Anvelope de Iarna sau All Season</b></p>
+            <p><b>Avem pe stoc : </b><br>- 195 / 65 R 15 <br>- 205 / 55 R 16</p>
+            <p>Dar se poate aduce pe comanda orice dimensiune</p>
+            <p><b>Mai avem pe stoc : </b><br>- Baterii pentru autovehicule si tractoare la preturi avantajoase si cu GARANTIE 2 ANI! <br>- Antigel G11, G12 , G13 <br>- Lichid de spalat parbriz iarna ❄️ -20 <br>- Ulei motor , cutie de viteze manuale si automate</p>
+            <p><b>Ne gasiti in Urvind la Nr 298 A</b></p>
+        </div>
+    </div>
+
+    <div class="item_one">
+        <div class="image_row">
+            <img src="assets/item_three_photo_one.png" class="slide_left">
+            <img src="assets/item_three_photo.png" class="slide_left">
+        </div>
+        <div class="slide_right">
+            <p><b>🥶🥶🥶 Datorită vremurilor friguroase am adus în locația noastră pentru dumneavoastră :</b><br>- Baterii pentru orice tip de autovehicul ⚡️<br>- Lichid de spălat parbriz 💧<br>- Antigel de diferite tipuri ❄️</p>
+            <p><b>Avem ULEI MOTUL pentru :</b><br>- motor<br>- cutie de viteze manuale si automate<br>- diferentiale<br>- cutii de transfer <br>- pe stoc pentru o gamă variată de autovehicule</p>
+            <p>Vă așteptăm în locația noastră cu o cafea din partea casei !</p>
+        </div>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+
+                // Ha a szülő `.item_one` elem van figyelve
+                const parent = entry.target.closest('.item_one');
+                if (parent) parent.classList.add('visible');
+            }
+            });
+        }, {
+            threshold: 0.3
+        });
+
+        document.querySelectorAll('.slide_left, .slide_right').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+    <div class="bottom"></div>
+</body>
+</html>
