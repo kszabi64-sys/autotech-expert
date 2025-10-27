@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="footer_style.css">
 </head>
 <body>
+    <!-- Ez legyen a <body> elején vagy a <head> végén -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0">
+    </script>
     <header>
         <div class="header">
             <div class="header_center">
@@ -27,7 +32,6 @@
             </div>
 
             <div class="header_items" id="menu">
-                <a>Map</a>
                 <a>Servicii</a>
                 <a>Programare</a>
                 <a>Contact</a>
@@ -84,7 +88,6 @@
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
 
-                // Ha a szülő `.item_one` elem van figyelve
                 const parent = entry.target.closest('.item_one');
                 if (parent) parent.classList.add('visible');
             }
@@ -97,6 +100,13 @@
             observer.observe(el);
         });
     </script>
+
+    <div class="item_one">
+        <div class="slide_left">
+            <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F61565758932533%2Fvideos%2F1397537948183521%2F&show_text=false&width=357&t=0" width="357" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+        </div>
+    </div>
+    
     <div class="bottom"></div>
 </body>
 </html>
