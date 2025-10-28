@@ -5,8 +5,8 @@ body {
 
 .item_one {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
+  justify-content: flex-start;
   gap: 20px;
   padding: 5px;
   overflow: hidden;
@@ -45,6 +45,18 @@ body {
   transform: translateX(0);
 }
 
+.slide_right {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all 0.8s ease-out;
+  text-align: left; /* 👈 fontos: ne jobbra igazítson */
+}
+
+.slide_right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 .image_row {
   display: flex;
   justify-content: center;
@@ -54,10 +66,183 @@ body {
   max-width: 100%;
 }
 .image_row img {
-  width: 45%; /* vagy fix: 200px */
+  width: 45%;
   height: auto;
   object-fit: contain;
   border-radius: 12px;
+}
+
+.slide_left video {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  max-width: 100%;
+  height: auto;
+}
+
+.video-preview {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.video-preview.playing {
+  max-width: 800px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.slide_center {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: all 0.8s ease-out;
+  width: 60%;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.slide_center.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.map_container {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.map_container iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.item_one_map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 60%;
+  max-width: 1000px;
+  height: 450px; /* fix magasság, amit az iframe is átvesz */
+  margin: 20px auto;
+  background-color: rgb(253, 249, 243);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: box-shadow 0.5s ease;
+}
+
+.item_two {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 30px;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: rgb(253, 249, 243);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.form_group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.form_row {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  gap: 8px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="number"] {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form_button {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+#submitBtn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: grey;
+  border: none;
+  border-radius: 8px;
+  cursor: not-allowed;
+  transition: background-color 0.3s ease;
+}
+
+#submitBtn.active {
+  background-color: brown;
+  cursor: pointer;
+}
+
+.form_intro {
+  max-width: 600px;
+  margin: 0 auto 10px auto;
+  font-size: 20px;
+  color: #444;
+  text-align: center;
+  line-height: 1.6;
+  padding: 5px 10px;
+}
+
+.item_three {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: rgb(253, 249, 243);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.confirmation_message {
+  text-align: center;
+  font-size: 1rem;
+  color: #333;
+  background-color: #f0f0f0;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 @media (max-width: 768px) {
@@ -65,7 +250,7 @@ body {
     flex-direction: column;
     width: 85%;
     padding: 20px;
-    align-items: center; /* ez középre húzza a gyerekeket */
+    align-items: center;
   }
 
   .slide_left {
@@ -77,11 +262,29 @@ body {
   text-align: center;
     }
 
-    .image_row img,
+  .image_row img,
   .slide_right {
     width: 90%;
     max-width: 300px;
   }
 
+  .video-preview {
+    max-width: 100%;
+  }
+
+  .video-preview.playing {
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .slide_center {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .item_one_map {
+    width: 90%;
+    height: 300px;
+  }
 
 }

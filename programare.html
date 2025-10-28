@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoTech Expert</title>
+    <link rel="icon" href="assets/logo.jpg">
+    <link rel="stylesheet" href="header_style.css">
+    <link rel="stylesheet" href="body_style.css">
+    <link rel="stylesheet" href="footer_style.css">
+</head>
+<body>
+    <!-- Ez legyen a <body> elején vagy a <head> végén -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0">
+    </script>
+    <header>
+        <div class="header">
+            <div class="header_center">
+                <img src="assets/logo-removebg.png" class="header_img">
+                <div class="title_block">
+                    <a class="title" href="index.html">AutoTech Expert | </a>
+                    <a class="title_and" href="index.html"> Service Auto & ITP</a>
+                </div>
+            </div>
+        
+            <div class="menu_toggle" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+            <div class="header_items" id="menu">
+                <a href="servicii.html">Servicii</a>
+                <a href="programare.html">Programare</a>
+                <a href="contact.html">Contact</a>
+                <a href="https://www.facebook.com/profile.php?id=61565758932533">
+                    <img src="assets/facebook_logo.png" class="facebook_logo">
+                </a>
+                <a href="https://www.tiktok.com/@itpservice.autote?_t=ZN-90MOpDNkH70&_r=1">
+                    <img src="assets/tiktok_logo-removebg-preview.png" class="tiktok_logo">
+                </a>
+            </div>
+        </div>
+        <script>
+        function toggleMenu() {
+            const menu = document.getElementById("menu");
+            menu.classList.toggle("show");
+        }
+        </script>
+    </header>
+
+    <div class="item_two">
+        <div class="form_intro">
+            <p>Vă rugăm să completați câmpurile necesare și să trimiteți formularul. <br>Un coleg din echipa noastră vă va contacta în curând. <br>Datele introduse sunt tratate cu confidențialitate.</p>
+        </div>
+
+        <div class="form_group">
+            <div class="form_row">
+            <div class="slide_left">
+                <label for="name">Nume / Prenume</label>
+            </div>
+            <div class="slide_right">
+                <input type="text" id="name" name="name" placeholder="Introduceți numele">
+            </div>
+            </div>
+
+            <div class="form_row">
+            <div class="slide_left">
+                <label for="phone">Nr. Tel.</label>
+            </div>
+            <div class="slide_right">
+                <input type="tel" id="phone" name="phone" placeholder="Introduceți numărul de telefon">
+            </div>
+            </div>
+        </div>
+
+        <div class="form_group">
+            <div class="form_row">
+                <div class="slide_left">
+                    <label for="marca">Marca</label>
+                </div>
+                <div class="slide_right">
+                    <input type="text" id="marca" name="marca" placeholder="Introduceți marca vehiculului">
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="slide_left">
+                    <label for="model">Model</label>
+                </div>
+                <div class="slide_right">
+                    <input type="text" id="model" name="model" placeholder="Introduceți modelul vehiculului">
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="slide_left">
+                    <label for="vin">Serie VIN</label>
+                </div>
+                <div class="slide_right">
+                    <input type="text" id="vin" name="vin" placeholder="Introduceți seria VIN">
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="slide_left">
+                    <label for="motor">Cod motor</label>
+                </div>
+                <div class="slide_right">
+                    <input type="text" id="motor" name="motor" placeholder="Introduceți codul motorului">
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="slide_left">
+                    <label for="anul">Anul fabricat</label>
+                </div>
+                <div class="slide_right">
+                    <input type="number" id="anul" name="anul" placeholder="Introduceți anul fabricației">
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="slide_left">
+                    <label for="capacitate">Capacitate cilindrică</label>
+                </div>
+                <div class="slide_right">
+                    <input type="number" id="capacitate" name="capacitate" placeholder="Introduceți capacitatea (cm³)">
+                </div>
+            </div>
+        </div>
+        <div id="form_button" class="form_button">
+            <button id="submitBtn" disabled>Programare</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAGS54BAfkShpGlL4igLR_L9g-OLTxDWUY",
+            authDomain: "autotech-expert.firebaseapp.com",
+            projectId: "autotech-expert",
+            storageBucket: "autotech-expert.firebasestorage.app",
+            messagingSenderId: "628226096563",
+            appId: "1:628226096563:web:acec58e287ab35222f5fc6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const inputs = document.querySelectorAll('input');
+        const button = document.getElementById('submitBtn');
+
+        function checkFields() {
+            let allFilled = true;
+            inputs.forEach(input => {
+            if (input.value.trim() === '') {
+                allFilled = false;
+            }
+            });
+
+            button.disabled = !allFilled;
+            button.classList.toggle('active', allFilled);
+        }
+
+        inputs.forEach(input => {
+            input.addEventListener('input', checkFields);
+        });
+
+        button.addEventListener('click', async () => {
+            const now = new Date();
+            const timestamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}-${String(now.getSeconds()).padStart(2, '0')}`;
+
+            const data = {};
+            inputs.forEach(input => {
+                data[input.id] = input.value.trim(); // minden érték stringként
+            });
+
+            try {
+                await setDoc(doc(db, "programare", timestamp), data);
+
+                const confirmation = document.createElement('div');
+                confirmation.className = 'confirmation_message';
+                confirmation.innerText = 'Unul dintre colegii noștri vă va contacta în curând.';
+
+                const formButton = document.getElementById('form_button');
+                formButton.parentNode.insertBefore(confirmation, formButton);
+
+                inputs.forEach(input => input.value = '');
+                checkFields();
+            } catch (error) {
+                console.error("Eroare la trimitere:", error);
+                alert("A apărut o eroare. Încercați din nou.");
+            }
+        });
+    </script>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const el = document.querySelector('.slide_center');
+            el.classList.add('visible');
+        });
+    </script>
+
+    <script>
+        const video = document.getElementById('video_one');
+        video.addEventListener('play', () => {
+            video.classList.add('playing');
+        });
+        video.addEventListener('pause', () => {
+            video.classList.remove('playing');
+        });
+    </script>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+
+                const parent = entry.target.closest('.item_one');
+                if (parent) parent.classList.add('visible');
+            }
+            });
+        }, {
+            threshold: 0.3
+        });
+
+        document.querySelectorAll('.slide_left, .slide_right').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+    
+    <div class="bottom"></div>
+</body>
+</html>
