@@ -19,6 +19,59 @@ body {
   transition: box-shadow 0.5s ease;
 }
 
+.landing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  padding: 5px;
+  overflow: hidden;
+  width: 30%;
+  height: auto;
+  border-radius: 12px;
+  background-color: rgb(253, 249, 243);
+  margin: 10px auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.5s ease;
+}
+
+.landing.visible {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.landing img {
+  width: 98%;
+  height: 50%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.landing-button {
+  background-color: brown;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.left {
+  align-self: flex-start;
+}
+
+.right {
+  align-self: flex-end;
+  cursor: pointer;
+}
+
 .item_one.visible {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
@@ -49,7 +102,7 @@ body {
   opacity: 0;
   transform: translateX(100px);
   transition: all 0.8s ease-out;
-  text-align: left; /* 👈 fontos: ne jobbra igazítson */
+  text-align: left;
 }
 
 .slide_right.visible {
@@ -133,7 +186,7 @@ body {
   padding: 10px;
   width: 60%;
   max-width: 1000px;
-  height: 450px; /* fix magasság, amit az iframe is átvesz */
+  height: 450px;
   margin: 20px auto;
   background-color: rgb(253, 249, 243);
   border-radius: 12px;
@@ -260,7 +313,7 @@ input[type="number"] {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-    }
+  }
 
   .image_row img,
   .slide_right {
@@ -285,6 +338,26 @@ input[type="number"] {
   .item_one_map {
     width: 90%;
     height: 300px;
+  }
+
+  .landing {
+    width: 90%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .button-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .landing-button {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
   }
 
 }

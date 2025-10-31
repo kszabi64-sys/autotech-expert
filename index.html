@@ -33,7 +33,7 @@
 
             <div class="header_items" id="menu">
                 <a href="servicii.html">Servicii</a>
-                <a href="programare.html">Programare</a>
+                <a href="programare.html">Cerere ofertă</a>
                 <a href="contact.html">Contact</a>
                 <a href="https://www.facebook.com/profile.php?id=61565758932533">
                     <img src="assets/facebook_logo.png" class="facebook_logo">
@@ -50,6 +50,15 @@
         }
         </script>
     </header>
+
+    <div class="landing">
+        <img src="assets/landing_photo.png" alt="Landing photo">
+
+        <div class="button-row">
+            <a href="programare.html" class="landing-button left">Cerere ofertă</a>
+            <a id="toggle-call" class="landing-button right">Sună acum</a>
+        </div>
+    </div>
 
     <div class="item_one">
         <img src="assets/motor.jpg" class="slide_left">
@@ -124,6 +133,18 @@
             <p><b>Atenție unde duci mașina la reparat!</b> <br>La noi în service, calitatea lucrărilor și a pieselor este garantată! <br><b>Programări la nr. tel. 0751603824</b></p>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const button = document.getElementById("toggle-call");
+            const defaultText = "Sună acum";
+            const phoneNumber = "0751603824";
+
+            button.addEventListener("click", function () {
+            button.textContent = button.textContent === defaultText ? phoneNumber : defaultText;
+            });
+        });
+    </script>
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {

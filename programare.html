@@ -33,7 +33,7 @@
 
             <div class="header_items" id="menu">
                 <a href="servicii.html">Servicii</a>
-                <a href="programare.html">Programare</a>
+                <a href="programare.html">Cerere ofertă</a>
                 <a href="contact.html">Contact</a>
                 <a href="https://www.facebook.com/profile.php?id=61565758932533">
                     <img src="assets/facebook_logo.png" class="facebook_logo">
@@ -58,21 +58,21 @@
 
         <div class="form_group">
             <div class="form_row">
-            <div class="slide_left">
-                <label for="name">Nume / Prenume</label>
-            </div>
-            <div class="slide_right">
-                <input type="text" id="name" name="name" placeholder="Introduceți numele">
-            </div>
+                <div class="slide_left">
+                    <label for="name">Nume / Prenume</label>
+                </div>
+                <div class="slide_right">
+                    <input type="text" id="name" name="name" placeholder="Introduceți numele">
+                </div>
             </div>
 
             <div class="form_row">
-            <div class="slide_left">
-                <label for="phone">Nr. Tel.</label>
-            </div>
-            <div class="slide_right">
-                <input type="tel" id="phone" name="phone" placeholder="Introduceți numărul de telefon">
-            </div>
+                <div class="slide_left">
+                    <label for="phone">Nr. Tel.</label>
+                </div>
+                <div class="slide_right">
+                    <input type="tel" id="phone" name="phone" placeholder="Introduceți numărul de telefon">
+                </div>
             </div>
         </div>
 
@@ -130,9 +130,19 @@
                     <input type="number" id="capacitate" name="capacitate" placeholder="Introduceți capacitatea (cm³)">
                 </div>
             </div>
+
+            <div class="form_row">
+                <div class="slide_left">
+                    <label for="name">Mesaje</label>
+                </div>
+                <div class="slide_right">
+                    <input type="text" id="mesaje" name="mesaje" placeholder="Introduceți mesaje" maxlength="100">
+                    <small id="charCount">0 / 100</small>
+                </div>
+            </div>
         </div>
         <div id="form_button" class="form_button">
-            <button id="submitBtn" disabled>Programare</button>
+            <button id="submitBtn" disabled>Trimite</button>
         </div>
     </div>
 
@@ -171,18 +181,34 @@
             input.addEventListener('input', checkFields);
         });
 
+        const mesajeInput = document.getElementById('mesaje');
+        const charCount = document.getElementById('charCount');
+
+        mesajeInput.addEventListener('input', () => {
+        charCount.textContent = `${mesajeInput.value.length} / 100`;
+        });
+
         button.addEventListener('click', async () => {
+            const mesajeInput = document.getElementById('mesaje');
+            const mesajeValue = mesajeInput.value.trim();
+
+            if (mesajeValue.length > 100) {
+                alert("Mesajul este prea lung. Vă rugăm să folosiți maximum 100 de caractere.");
+                return;
+            }
+
             const now = new Date();
             const timestamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}-${String(now.getSeconds()).padStart(2, '0')}`;
 
             const data = {};
             inputs.forEach(input => {
-                data[input.id] = input.value.trim(); // minden érték stringként
+                data[input.id] = input.value.trim();
             });
 
             try {
                 await setDoc(doc(db, "programare", timestamp), data);
 
+                // ✅ Visszajelző üzenet
                 const confirmation = document.createElement('div');
                 confirmation.className = 'confirmation_message';
                 confirmation.innerText = 'Unul dintre colegii noștri vă va contacta în curând.';
@@ -190,8 +216,9 @@
                 const formButton = document.getElementById('form_button');
                 formButton.parentNode.insertBefore(confirmation, formButton);
 
+                // ✅ Mezők ürítése
                 inputs.forEach(input => input.value = '');
-                checkFields();
+                checkFields(); // újraellenőrzés, hogy a gomb deaktiválódjon
             } catch (error) {
                 console.error("Eroare la trimitere:", error);
                 alert("A apărut o eroare. Încercați din nou.");
